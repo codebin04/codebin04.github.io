@@ -70,17 +70,11 @@ author:
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
-  soundcloud       : # Username
   steam            : # Username
   telegram         : # URL
-  tumblr           : # Username
   twitter          : # Username for X / Twitter
-  vine             : # Username
-  weibo            : # Username
   wikipedia        : # Username
-  xing             : # Username
   youtube          : # Username
-  zhihu            : # Username
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
