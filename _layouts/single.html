@@ -36,7 +36,15 @@ layout: default
             <a href="{{ page.url | absolute_url }}" itemprop="url">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</a>
           </h1>
           {%- endif %}
-          {% include page__meta.html locale=locale %}
+          {%- if page.categories and page.categories != empty -%} 
+            <p class="page__taxonomy page__taxonomy--top">
+              {%- for category in page.categories -%}
+              <a class="page__taxonomy-item" href="{{ '/categories/#' | append: category | relative_url }}">{{ category }}</a>
+            {%- endfor -%}
+          </p>
+        {%- endif %}
+          
+        {% include page__meta.html locale=locale %}
         </header>
       {% endunless %}
 
