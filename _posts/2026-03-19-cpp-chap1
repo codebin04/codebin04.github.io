@@ -1,0 +1,66 @@
+---
+layout: post
+title: "명품 C++ 1장 실습문제 풀이"
+date: 2026-03-19 21:00:00 +0900
+categories: [cpp, chapter1]
+tags: [cpp]
+---
+
+## 1번
+
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "나의 조국은 대한민국 입니다.\n";
+    return 0;
+}
+```
+
+## 2번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "나의 이름은 황기태\n나의 전공은 컴퓨터공학\n나의 취미는 헬스입니다.";
+    return 0;
+}
+```
+
+## 3번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 15;
+    int b = 4;
+    int n = a % b;
+
+    cout << a << "를 " << b << "로 나눈 나머지는 "
+         << n << "입니다.";
+
+    return 0;
+}
+```
+
+## 4번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 1; i <= 4; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+```
