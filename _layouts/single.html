@@ -56,7 +56,6 @@ layout: default
         </header>
       {% endunless %}
 
-    #  {# ==== 여기부터 상단 “같은 카테고리의 글” 박스 ==== #}
   {% assign current_categories = page.categories | default: [] %}
   {% assign related_by_category = "" | split: "" %}
 
@@ -83,7 +82,6 @@ layout: default
       </ul>
     </section>
   {% endif %}
-  #{# ==== 여기까지 상단 박스 ==== #}
 
       <section class="page__content e-content" itemprop="text">
         {% if page.toc %}
