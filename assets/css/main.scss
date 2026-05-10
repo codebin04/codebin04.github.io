@@ -7,3 +7,40 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* 같은 카테고리 글 박스 스타일 */
+.box--category-related {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0,0,0,0.08);
+  background-color: rgba(0,0,0,0.02);
+}
+
+.box--category-related .box__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.8;
+}
+
+.box--category-related .box__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.box--category-related .box__item + .box__item {
+  margin-top: 0.25rem;
+}
+
+.box--category-related .box__link {
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.box--category-related .box__link:hover {
+  text-decoration: underline;
+}
