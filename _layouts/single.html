@@ -60,6 +60,33 @@ layout: default
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
+      
+      {%- comment -%} 여기부터 같은 카테고리 글 목록 {%- endcomment -%}
+      {% assign current_categories = page.categories | default: [] %}
+      {% assign related_by_category = "" | split: "" %}
+
+      {% for post in site.posts %}
+        {% if post.url != page.url %}
+          {% assign intersect = post.categories | intersection: current_categories %}
+          {% if intersect.size > 0 %}
+            {% assign related_by_category = related_by_category | push: post %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if related_by_category.size > 0 %}
+        <section class="page__related-by-category">
+          <h3>같은 카테고리의 글</h3>
+          <ul>
+            {% for p in related_by_category %}
+              <li>
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+      {%- comment -%} 여기까지 {%- endcomment -%}
 
       <footer class="page__meta">
         {% if site.data.ui-text[locale].meta_label %}
