@@ -1,0 +1,339 @@
+---
+layout: single
+title: "명품 C++ programming 11장 실습문제 풀이"
+date: 2026-06-01
+categories: [cpp, complete]
+tags: [cpp]
+---
+
+## 1번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout << "입력>>";
+	int ch;
+	while ((ch = cin.get()) != EOF) {
+		cout.put(ch);
+		if (ch == '\n' || ch == ';')
+			break;
+	} //버퍼에 입력 남음
+}
+
+```
+
+## 2번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+	int count = 0;
+	cout << "입력>>";
+	while (true) {
+		char ch;
+		cin.get(ch);
+		if (cin.eof())
+			break;
+
+		if (ch == '\n') {
+			cout << count << "개 입력됨" << endl;
+			count = 0;
+			cout << "입력>>";
+		}
+		else if (ch >= '0' && ch <= '9')
+				count++;
+
+	}
+}
+
+```
+
+## 3번
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	string cmd;
+	while (true) {
+		cout << "종료하려면 암호를 입력하세요>>";
+		getline(cin, cmd);
+		if(cmd == "see you later")
+		{
+			cout << "프로그램을 종료합니다...";
+			return 0;
+		}
+		else {
+			cout << "암호가 틀렸습니다." << endl;
+			continue;
+		}
+	}
+}
+
+```
+
+## 4번
+
+```cpp
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int lineNo = 1;
+	int maxSize = 0;
+	int longNo = 0;
+	string line;
+	string longLine;
+
+	cout<< "입력>> " << endl;
+	
+	while (true) {
+		cout << lineNo << ":\t";
+		getline(cin, line);
+		if (cin.eof()) {
+			cout << "가장 긴 문장은 라인 " << longNo << " : " << longLine;
+			break;
+		}
+
+		if (maxSize < line.size()) {
+			longLine = line; //문자열복사
+			maxSize = line.size(); //문장길이 최신화
+			longNo = lineNo;
+		}
+		lineNo++;
+
+	}
+}
+```
+
+## 5번
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+	cout.width(15);
+	cout.fill('_');
+	cout << left;
+	cout << "Number";
+
+	cout.width(15);
+	cout.fill('_');
+	//cout << left;
+	cout << "Square";
+
+	cout.width(15);
+	cout.fill('_');
+	//cout << left;
+	cout << "Square Root" << endl;
+
+	double num = 0;
+
+	while(true){
+		if (num == 50) break;
+		cout << setprecision(6);//기본값
+		cout << setw(15) << setfill('_') << num;
+		cout << setw(15) << num * num;
+		cout << setw(15) << setprecision(3) << sqrt(num); //setw() 제외한 조작자는 계속 유지됨. but 계속 새로 작성해야 오류방지가능?
+		cout << endl;
+		num += 5;
+	}
+}
+
+```
+
+## 6번
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+	cout << "dec" << '\t' << "hexa" << '\t' << "char" << '\t';
+	cout << "dec" << '\t' << "hexa" << '\t' << "char" << '\t';
+	cout << "dec" << '\t' << "hexa" << '\t' << "char" << '\t';
+	cout << "dec" << '\t' << "hexa" << '\t' << "char" << endl;
+	cout << "===" << '\t' << "====" << '\t' << "====" << '\t';
+	cout << "===" << '\t' << "====" << '\t' << "====" << '\t';
+	cout << "===" << '\t' << "====" << '\t' << "====" << '\t';
+	cout << "===" << '\t' << "====" << '\t' << "====" << endl;
+
+	for (int i = 0; i < 128; i++) {
+		cout.width(8);
+		cout << left;
+		cout << dec << i;
+
+		cout.width(8);
+		cout << left;
+		cout << hex << i;
+
+		cout.width(8);
+		cout << left;
+		cout << (isprint(i) ? (char)i : '.');
+
+		if (i % 4 == 3)
+			cout << endl;
+	}
+}
+
+```
+## 7번
+
+```cpp
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+class Phone {
+	string name, telNum, address;
+public:
+	Phone(string name = "", string telNum = "", string address = "") {
+		this->name = name;
+		this->telNum = telNum;
+		this->address = address;
+	}
+
+	friend istream& operator >> (istream& ist, Phone& p);
+	friend ostream& operator << (ostream& ost, Phone p);
+};
+
+istream& operator >> (istream& ist, Phone& p) {
+	cout << "이름:";
+	ist >> p.name;
+	cout << "전화번호:";
+	ist >> p.telNum;
+	cout << "주소:";
+	ist.ignore(1);
+	getline(ist, p.address);
+
+	return ist;
+}
+
+ostream& operator << (ostream& ost, Phone p) {
+	ost << "( " << p.name << ", " << p.telNum << ", " << p.address << " )";
+	return ost;
+}
+
+int main() {
+	Phone queen, prince;
+	cin >> queen >> prince;
+	cout << queen << endl << prince << endl;
+}
+```
+## 8번
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Exp {
+	int base;
+	int exp;
+public:
+	Exp(int base = 1, int exp = 1);
+	int calcValue();
+
+	friend istream& operator >> (istream& ist, Exp& e);
+	friend ostream& operator << (ostream& ost, Exp e);
+};
+
+Exp::Exp(int base, int exp) {
+	this->base = base;
+	this->exp = exp;
+}
+
+int Exp::calcValue() {
+	int calc = 1;
+	for (int i = 0; i < exp; i++) {
+		calc *= base;
+	}
+	return calc;
+}
+
+istream& operator >> (istream& ist, Exp& e) {
+	cout << "베이스: ";
+	ist >> e.base;
+	cout << "지수: ";
+	ist >> e.exp;
+
+	return ist;
+}
+
+ostream& operator << (ostream& ost, Exp e) {
+	ost << e.base << "의 " << e.exp << "승:" << e.calcValue();
+	return ost;
+}
+
+int main() {
+	Exp a, b;
+	cin >> a >> b;
+	cout << a << endl << b << endl;
+}
+
+```
+## 9번
+
+```cpp
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+istream& promptName(istream& ist) {
+	cout << "이름 입력 >>";
+	return ist;
+}
+
+istream& promptAge(istream& ist) {
+	cout << "나이 입력>>";
+	return ist;
+}
+
+
+int main() {
+	string name;
+	int age;
+	cin >> promptName >> name;
+	cin >> promptAge >> age;
+	cout << "이름은 " << name << ", 나이는 " << age << endl;
+}
+```
+## 10번
+
+```cpp
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+istream& prompt(istream& ist) {
+	cout << "암호>>";
+	return ist;
+}
+int main() {
+	string password;
+	while (true) {
+		cin >> prompt >> password;
+		if (password == "C++") {
+			cout << "login success!!" << endl;
+			break;
+		}
+		else
+			cout << "login fail. try again" << endl;
+	}
+}
+```
